@@ -1,65 +1,65 @@
 #include "shell.h"
+
 /**
- * _executable– returns true if shell is executable
+ * interactive - returns true if shell is interactive mode
  * @info: struct address
  *
- * Return: 1 if executable mode, 0 otherwise
+ * Return: 1 if interactive mode, 0 otherwise
  */
-
-int _executable(info_t *info)
+int interactive(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
 
 /**
- * seperator- if character is a seperator
- * @cter: the char to check
- * @seperates: the delimeter string
+ * is_delim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int seperator(char cter, char *seperates)
+int is_delim(char c, char *delim)
 {
-	while (*seperates)
-		if (*seperates++ == cter)
+	while (*delim)
+		if (*delim++ == c)
 			return (1);
 	return (0);
 }
 
 /**
- * _alpha - checks for characters that aren’t delimiters
- * @cinput: The character to input
+ * _isalpha - checks for alphabetic character
+ * @c: The character to input
  * Return: 1 if c is alphabetic, 0 otherwise
  */
 
-int _alpha(int cinput)
+int _isalpha(int c)
 {
-	if ((cinput >= 'a' && cinput <= 'z') || (cinput >= 'A' && cinput <= 'Z'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	else
 		return (0);
 }
 
 /**
- * _strcon - converts a string to an integer
- * @str: the string to be converted
+ * _atoi - converts a string to an integer
+ * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  */
 
-int _strcon(char *str)
+int _atoi(char *s)
 {
 	int i, sign = 1, flag = 0, output;
 	unsigned int result = 0;
 
-	for (i = 0; str[i] != '\0' && flag != 2; i++)
+	for (i = 0; s[i] != '\0' && flag != 2; i++)
 	{
-		if (str[i] == '-')
+		if (s[i] == '-')
 			sign *= -1;
 
-		if (str[i] >= '0' && str[i] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
 			flag = 1;
 			result *= 10;
-			result += (str[i] - '0');
+			result += (s[i] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;
