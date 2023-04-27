@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * stop - the shell gets exited
- * @info: contains potential args.
+ * stops- stops the shell
+ * @info: contains arguments.
  * constant function prototype.
  * Return: exits with a given exit status
- * (0) if info.argv[0] != "stop"
+ * (0) if info.argv[0] != "exit"
  */
-int stop(info_t *info)
+int stops(info_t *info)
 {
-	int stopcheck;
+	int exit;
 
-	if (info->argv[1]) /* an exit argument exists */
+	if (info->argv[1])
 	{
-		stopcheck = _erratoi(info->argv[1]);
-		if (stopcheck == -1)
+		exit = _erratoi(info->argv[1]);
+		if (exit == -1)
 		{
 			info->status = 2;
-			print_error(info, "wrong value: ");
+			print_error(info, "wrong number: ");
 			_eputs(info->argv[1]);
 			_eputchar('\n');
 			return (1);
@@ -30,11 +30,12 @@ int stop(info_t *info)
 }
 
 /**
- * cdir- changes the current directory of the process
- * @info: Structure containing potential arguments.
-  * Return: Always 0
+ * cdp - changes the current directory of the process
+ * @info: containing potential arguments. Used to maintain
+ * constant function prototype.
+ * Return: Always 0
  */
-int cdir(info_t *info)
+int cdp(info_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -46,7 +47,7 @@ int cdir(info_t *info)
 	{
 		dir = _getenv(info, "HOME=");
 		if (!dir)
-			chdir_ret = /* */
+			chdir_ret = /* TODO: what should this be? */
 				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
@@ -60,7 +61,7 @@ int cdir(info_t *info)
 			return (1);
 		}
 		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = /* */
+		chdir_ret = /* TODO: what should this be? */
 			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
@@ -79,17 +80,17 @@ int cdir(info_t *info)
 }
 
 /**
- * cdirp - changes the current directory of the process
- * @info: Structure containing potential arguments. Used to maintain
+ * changes - changes the current directory of the process
+ * @info: potential arguments. Used to maintain
  * constant function prototype.
- * Return: 0
+ * Return: Always 0
  */
-int cdirp(info_t *info)
+int changes(info_t *info)
 {
 	char **arg_array;
 
 	arg_array = info->argv;
-	_puts("help call functions. Function not done yet\n");
+	_puts("help call works. Function not yet implemented \n");
 	if (0)
 		_puts(*arg_array); /* temp att_unused workaround */
 	return (0);
